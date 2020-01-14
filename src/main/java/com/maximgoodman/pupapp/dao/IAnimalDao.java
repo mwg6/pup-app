@@ -17,4 +17,6 @@ public interface IAnimalDao {
 
     Collection<Animal> getAllAnimals();
 
+    Animal getAnimal(UUID id);
+
 }

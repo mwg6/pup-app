@@ -3,10 +3,12 @@ package com.maximgoodman.pupapp.api;
 import com.maximgoodman.pupapp.model.Animal;
 import com.maximgoodman.pupapp.service.AnimalService;
 import lombok.Getter;
+import org.apache.catalina.connector.Response;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -29,5 +31,36 @@ public class AnimalController {
     @RequestMapping("listAll")
     public Collection<Animal> getAllAnimals(){
         return animalService.getAllAnimals();
+    }
+
+    @GetMapping
+    @RequestMapping("animal/{name}")
+    public Animal getAnimalByName(@PathVariable String name){
+        Optional<Animal> a = getAllAnimals()
+                    .stream()
+                    .filter(x -> x.getName().equals(name))
+                    .findFirst();
+        return a.isPresent()?a.get():null;
+    }
+
+    @PutMapping
+    @RequestMapping("animal/{id}")
+    public Animal updateAnimal(@RequestBody Animal animal){
+        Animal temp = animalService.getAnimal(animal.getId());
+        if(temp!=null){
+            Animal novel = Animal.builder()
+                                    .id(animal.getId())
+                                    .name(animal.getName())
+                                    .coloration(animal.getColoration())
+                                    .addressFound(animal.getAddressFound())
+                                    .comments(animal.getComments())
+                                    .build();
+            animalService.addAnimal(novel.id, novel);
+
+            return novel;
+        }
+        else{
+            return null;
+        }
     }
 }

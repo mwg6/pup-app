@@ -13,20 +13,21 @@ public class HashMapAnimalDoa implements IAnimalDao{
 
     @Override
     public int insertAnimal(UUID id, Animal animal) {
-
-        if(DB.containsKey(id)){
-            DB.put(id, animal);
-            return 2;
-        }
-        else{
-            DB.put(id, animal);
-            return 1;
-        }
+        DB.put(id, animal);
+        return 1;
 
     }
 
     @Override
     public Collection<Animal> getAllAnimals(){
         return DB.values();
+    }
+
+    @Override
+    public Animal getAnimal(UUID id) {
+        if(DB.containsKey(id)){
+            return DB.get(id);
+        }
+        return null;
     }
 }

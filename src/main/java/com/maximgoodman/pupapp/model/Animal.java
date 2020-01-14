@@ -10,10 +10,10 @@ import java.util.UUID;
 @Setter
 @EqualsAndHashCode
 @ToString
-@NoArgsConstructor
+@Builder
 public class Animal {
 
-    private UUID id;
+    public UUID id;
 
     @JsonProperty("name")
     private String name;
@@ -27,6 +27,9 @@ public class Animal {
     @JsonProperty("addressFound")
     private String addressFound;
 
-
+    public Animal(){
+        UUID id = UUID.randomUUID();
+        this.id=id;
+    }
 
 }

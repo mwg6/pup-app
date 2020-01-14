@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class AnimalService {
@@ -24,7 +25,15 @@ public class AnimalService {
         return animalDao.insertAnimal(animal);
     }
 
+    public int addAnimal(UUID id, Animal animal){
+        return animalDao.insertAnimal(id, animal);
+    }
+
     public Collection<Animal> getAllAnimals(){
         return animalDao.getAllAnimals();
+    }
+
+    public Animal getAnimal(UUID id){
+        return animalDao.getAnimal(id);
     }
 }
