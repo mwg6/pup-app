@@ -6,6 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 @Service
 public class AnimalService {
 
@@ -18,5 +22,9 @@ public class AnimalService {
 
     public int addAnimal(Animal animal){
         return animalDao.insertAnimal(animal);
+    }
+
+    public Collection<Animal> getAllAnimals(){
+        return animalDao.getAllAnimals();
     }
 }

@@ -4,9 +4,7 @@ import com.maximgoodman.pupapp.model.Animal;
 import org.springframework.stereotype.Repository;
 
 import java.time.Period;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @Repository("hashDoa")
 public class HashMapAnimalDoa implements IAnimalDao{
@@ -25,5 +23,10 @@ public class HashMapAnimalDoa implements IAnimalDao{
             return 1;
         }
 
+    }
+
+    @Override
+    public Collection<Animal> getAllAnimals(){
+        return DB.values();
     }
 }

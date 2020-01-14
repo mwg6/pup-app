@@ -2,10 +2,12 @@ package com.maximgoodman.pupapp.api;
 
 import com.maximgoodman.pupapp.model.Animal;
 import com.maximgoodman.pupapp.service.AnimalService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.Getter;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Collection;
+import java.util.Map;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("api/v1/")
@@ -21,5 +23,11 @@ public class AnimalController {
     @RequestMapping("addAnimal")
     public void addAnimal(@RequestBody Animal animal){
         animalService.addAnimal(animal);
+    }
+
+    @GetMapping
+    @RequestMapping("listAll")
+    public Collection<Animal> getAllAnimals(){
+        return animalService.getAllAnimals();
     }
 }
