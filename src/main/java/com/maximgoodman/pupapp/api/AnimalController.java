@@ -6,10 +6,8 @@ import lombok.Getter;
 import org.apache.catalina.connector.Response;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/v1/")
@@ -29,8 +27,17 @@ public class AnimalController {
 
     @GetMapping
     @RequestMapping("listAll")
-    public Collection<Animal> getAllAnimals(){
-        return animalService.getAllAnimals();
+    public List<Animal> getAllAnimals(){
+        return animalService.getAllAnimals().stream()
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping
+    @RequestMapping("listActive")
+    public List<Animal> getActiveAnimals(){
+        return animalService.getAllAnimals().stream()
+                .filter(x -> x.isActive())
+                .collect(Collectors.toList());
     }
 
     @GetMapping
