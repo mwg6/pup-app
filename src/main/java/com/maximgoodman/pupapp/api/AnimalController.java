@@ -45,9 +45,9 @@ public class AnimalController {
 
     @PutMapping
     @RequestMapping("animal/{id}")
-    public Animal updateAnimal(@RequestBody Animal animal){
+    public Animal updateAnimal(@PathVariable("id") UUID id, @RequestBody Animal animal){
         Animal temp = animalService.getAnimal(animal.getId());
-        if(temp!=null){
+        if(temp!=null && id == temp.getId()){
             Animal novel = Animal.builder()
                                     .id(animal.getId())
                                     .name(animal.getName())
@@ -63,4 +63,14 @@ public class AnimalController {
             return null;
         }
     }
+/*
+    @DeleteMapping
+    @RequestMapping("animal/{id}")
+    public int deleteAnimal(@PathVariable("id") UUID id){
+        if (animalService.getAnimal(id) != null) {
+            //TODO
+        }
+        return 200;
+    }
+    */
 }

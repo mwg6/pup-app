@@ -10,6 +10,7 @@ import java.util.UUID;
 @Setter
 @EqualsAndHashCode
 @ToString
+@AllArgsConstructor
 @Builder
 public class Animal {
 
@@ -26,6 +27,15 @@ public class Animal {
 
     @JsonProperty("addressFound")
     private String addressFound;
+
+    @JsonProperty("latitude")
+    private String latitude;
+
+    @JsonProperty("longitude")
+    private String longitude;
+
+    @JsonProperty("active")
+    private boolean active = true;
 
     public Animal(){
         UUID id = UUID.randomUUID();
